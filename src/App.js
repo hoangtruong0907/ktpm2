@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import UserList from './components/UserList';
+import HomePage from './components/HomePage'; // Import HomePage
 import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
 
 const PrivateRoute = ({ children }) => {
@@ -28,6 +29,9 @@ const Navigation = () => {
         </Typography>
         {!token ? (
           <>
+            <Button color="inherit" onClick={() => navigate('/')}> {/* Quay về trang Home */}
+              Trang chủ
+            </Button>
             <Button color="inherit" onClick={() => navigate('/login')}>
               Login
             </Button>
@@ -52,6 +56,7 @@ const App = () => {
         <Navigation />
         <Container sx={{ mt: 4 }}>
           <Routes>
+            <Route path="/" element={<HomePage />} /> {/* Trang Home */}
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route
@@ -62,7 +67,6 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/" element={<Navigate to="/home" />} />
           </Routes>
         </Container>
       </Router>
